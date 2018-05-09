@@ -1,0 +1,26 @@
+# =================================================================
+# Licensed Materials - Property of IBM
+#
+# (c) Copyright IBM Corp. 2014 All Rights Reserved
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+# =================================================================
+name             'cc_policy_windows_task_scheduler'
+version          '1.0.6'
+maintainer       'ShwetaliBerad'
+maintainer_email 'berad@ca.ibm.com'
+license          'IBM Proprietary - All rights reserved'
+description      'recipe wrapper'
+# long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
+# depends          'sentinel_ingredients', '~> 0.0.9'
+depends           'chef_handler'
+depends           'cobalt_ohai'
+depends          'policy_windows_task_scheduler', '= 0.2.8'
+
+attribute        'cc_policy_windows_task_scheduler/permissions',
+                 description: 'scheduled task permissions',
+                 type: 'array',
+                 default: ['ReadAndExecute']
+
+supports 'windows', '>= 6.1.0'

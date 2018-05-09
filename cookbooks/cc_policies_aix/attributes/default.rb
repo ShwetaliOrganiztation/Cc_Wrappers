@@ -1,0 +1,46 @@
+default['cc_policies_aix']['policy_map'] = { "components" => [
+  {
+    identified_by: 'value',
+    id: 'os:aix',
+    "enforced_by" => [
+      { policy: 'cc_policy_aix_berkeley', enabled: true },
+      { policy: 'cc_policy_aix_db2', enabled: true },
+      { policy: 'cc_policy_aix_dict_words', enabled: true },
+      { policy: 'cc_policy_aix_duplicate_gid', enabled: true },
+      { policy: 'cc_policy_aix_failed_login_retries', enabled: true },
+      { policy: 'cc_policy_aix_file_permissions', enabled: true },
+      { policy: 'cc_policy_aix_ftp', enabled: true },
+      { policy: 'cc_policy_aix_i4ls', enabled: true },
+      { policy: 'cc_policy_aix_inactive_accounts', enabled: true },
+      { policy: 'cc_policy_aix_log_retention', enabled: true },
+      { policy: 'cc_policy_aix_motd', enabled: true },
+      { policy: 'cc_policy_aix_nfs', enabled: true },
+      { policy: 'cc_policy_aix_nis', enabled: true },
+      { policy: 'cc_policy_aix_no_loginpassword', enabled: true },
+      { policy: 'cc_policy_aix_ntpd', enabled: true },
+      { policy: 'cc_policy_aix_osr_full_path', enabled: true },
+      { policy: 'cc_policy_aix_pass_max_age', enabled: true },
+      { policy: 'cc_policy_aix_pass_min_age', enabled: true },
+      { policy: 'cc_policy_aix_pass_min_len', enabled: true },
+      { policy: 'cc_policy_aix_passwd_file', enabled: true },
+      { policy: 'cc_policy_aix_password_history', enabled: true },
+      { policy: 'cc_policy_aix_priv_group_membership', enabled: true },
+      { policy: 'cc_policy_aix_rlogin', enabled: true },
+      { policy: 'cc_policy_aix_session', enabled: true },
+      { policy: 'cc_policy_aix_snmpd', enabled: true },
+      { policy: 'cc_policy_aix_sshd', enabled: true },
+      { policy: 'cc_policy_aix_sudo', enabled: true },
+      { policy: 'cc_policy_aix_sysctl_network', enabled: true },
+      { policy: 'cc_policy_aix_syslog', enabled: true },
+      { policy: 'cc_policy_aix_syslog_v2', enabled: true },
+      { policy: 'cc_policy_aix_tftp', enabled: true },
+      { policy: 'cc_policy_aix_unsafe_services', enabled: true },
+      { policy: 'cc_policy_aix_xserver', enabled: true },
+      { policy: 'cc_policy_aix_entire_dir_perms', enabled: true },
+	  { policy: 'cc_policy_aix_root_rlogin', enabled: true },
+	  { policy: 'cc_policy_aix_was', enabled: true },
+      { policy: 'cc_policy_aix_motd_v2', enabled: true }
+    ]
+  }
+]
+}

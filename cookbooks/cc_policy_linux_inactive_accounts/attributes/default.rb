@@ -1,0 +1,78 @@
+default['cc_policy_linux_inactive_accounts']['policy_map'] = {"components" => [
+                              {
+                               identified_by: 'value',
+                               id: 'os:linux',
+                               "enforced_by" => [{
+                                                policy: 'policy_linux_inactive_accounts',
+                                                enabled: true}]
+                              }
+
+
+                             ]
+                          }
+
+default['cc_policy_linux_inactive_accounts']['ui_metadata']['policy_linux_inactive_accounts'] = {
+           "policy"=>"policy_linux_inactive_accounts",
+           "display_name"=>"policy_linux_inactive_accounts",
+           "techspec"=> '<b>CSD:</b>NA<br><b>-ITCS:</b>NA<br>',
+              "attributes"=>[
+                  {"key"=>"inactive_age",
+                   "type"=>"number",
+                   "display_type"=>"text_box",
+                   "display_name"=>"Inactive Age",
+                   "validator"=>"[0-9]*",
+                   "units"=>"days",
+                   "options"=>[],
+                   "hint"=>"Number of days for an account to be considered to be inactive"},
+                  {"key"=>"whitelist",
+                   "type"=>"csv",
+                   "display_name"=> "White List User Ids",
+                   "display_type"=> "string_array",
+                   "validator"=>"",
+                   "units"=>"",
+                   "options"=>[],
+                   "hint"=>"Enter a comma-separated list of user ids"},
+                  {"key"=>"ignore_no_history",
+                   "type"=>"Boolean",
+                   "display_type"=>"single_select",
+                   "display_name"=> "Ignore if no history",
+                  "validator"=>"",
+                   "units"=>"",
+                   "options"=>[],
+                   "hint"=>"Set to false if lack of history is an issue"},
+                  {"key"=>"exempt_accounts_without_shell",
+                   "type"=>"Boolean",
+                   "display_type"=>"single_select",
+                   "display_name"=> "Exempt locked accounts without shell",
+                   "validator"=>"",
+                   "units"=>"",
+                   "options"=>[],
+                   "hint"=>"Exempt accounts without shell?"},
+                  {"key"=>"exempt_locked_accounts",
+                   "type"=>"Boolean",
+                   "display_type"=>"single_select",
+                   "display_name"=> "Exempt locked accounts",
+                   "validator"=>"",
+                   "units"=>"",
+                   "options"=>[],
+                   "hint"=>"Exempt locked accounts ?"},
+                  {"key"=>"exempt_disabled_accounts",
+                   "type"=>"Boolean",
+                   "display_type"=>"single_select",
+                   "display_name"=> "Exempt disabled accounts",
+                   "validator"=>"",
+                   "units"=>"",
+                   "options"=>[],
+                   "hint"=>"Exempt disabled accounts ?"},
+                  {"key"=>"exempt_pam_denied_user_list",
+                   "type"=>"Boolean",
+                   "display_type"=>"single_select",
+                   "display_name"=> "Exempt users if in pam denied list",
+                   "validator"=>"",
+                   "units"=>"",
+                   "options"=>[],
+                   "hint"=>"Exempt pam denied user list ?"}
+               ],
+             "validator"=>"",
+             "units"=>"",
+             "hint"=>""}

@@ -1,0 +1,197 @@
+linux_os_recipes = node[cookbook_name]['linux_os_recipes']
+linux_mw_recipes = node[cookbook_name]['linux_mw_recipes']
+aix_os_recipes = node[cookbook_name]['aix_os_recipes']
+aix_mw_recipes = node[cookbook_name]['aix_mw_recipes']
+windows_os_recipes = node[cookbook_name]['windows_os_recipes']
+windows_mw_recipes = node[cookbook_name]['windows_mw_recipes']
+
+linux_os_recipes = node[cookbook_name]['linux_os_recipes']
+
+
+  # include_recipe "cobalt_ohai"   
+
+puts "*** node chef environment is #{node.chef_environment} *** "
+
+puts "***** platform family is #{node['platform_family']} *****"
+
+
+
+#cookbook_file "#{node["chef_handler"]["handler_path"]}/recipe_wrapper_handler.rb" do
+#  source "recipe_wrapper_handler.rb"
+#  owner "root"
+##  group "root"
+#  mode 00755
+#  action :create
+#end
+
+#chef_handler "RecipeWrapper::RecipeWrapperHandler" do
+#  source "#{node["chef_handler"]["handler_path"]}/recipe_wrapper_handler.rb"
+#  supports :exception => true
+#  ignore_failure true
+#  action :enable
+  
+#end
+
+#######################################################################
+
+if (node['platform_family'] == 'rhel' || 'linux' || 'suse')
+
+    puts "***** platform is #{node['platform']} *****" 
+
+
+
+ if node.automatic['ccmysql']
+    puts "trying extract automatic"
+    msh = node.automatic.to_json
+    puts msh.to_s
+ end
+
+
+ if node.automatic['ccmysql']
+    puts "trying extract"
+    msh = node.automatic.ccmysql
+    puts msh.status
+    puts "*"
+  
+    if node.automatic['ccmysql']['status'] == "notinstalled" 
+           puts "***** ccmysql attribute exists and is status is Not installed *****" 
+        end
+   
+    if node.automatic['ccmysql']['status'] == "istalled"
+           puts "***** ccmysql attribute exists and is status is Installed *****"
+        end 
+   
+  else
+     puts "***** ccmysql does not exist *****" 
+  end  
+
+  
+
+
+    puts "walking thru the list of linux os recipes"
+
+    if  linux_os_recipes["#{node.chef_environment}"]
+
+       linux_os_recipes["#{node.chef_environment}"].each do |recipe_name|
+           
+           puts "current recipe is #{recipe_name}"
+           include_recipe "#{recipe_name}"
+       end
+    end
+   
+  #  if  node.normal['policy_linux_pass_max_age']
+ #       if  node.normal['policy_linux_pass_max_age']['maxdays']  
+  #          node.normal['policy_linux_pass_max_age']['maxdays'] = 222
+  #          puts "set max days"
+   #     else
+   #         node.normal['policy_linux_pass_max_age']['maxdays'] = 222
+   #         puts "created and set max days" 
+  #      end       
+   # else
+   #    node.normal['policy_linux_pass_max_age']['maxdays'] = 222
+   #    puts "created and set policy and set max days"
+   # end
+
+    # walk thru middleware recipes and check against rpm
+
+    if linux_mw_recipes["#{node.chef_environment}"]
+
+    
+       linux_mw_recipes["#{node.chef_environment}"].each do |recipe_name|
+           puts "current recipe is #{recipe_name}"
+           if (recipe_name =~ /postgres/i)
+               rpm, _stderr, status = Open3.capture3("rpm -qa | grep -i 'postgresql'")
+               rpm[/^postgres/] ? installed = true : installed = false
+               if installed  
+                  include_recipe "#{recipe_name}"
+               end
+           end
+             
+           if (recipe_name =~ /sudo/i)
+               rpm, _stderr, status = Open3.capture3("rpm -qa | grep -i 'sudo'")
+               rpm[/^sudo/] ? installed = true : installed = false
+               if installed 
+                  include_recipe "#{recipe_name}"
+               end   
+           end
+   
+       end #end linux do loop
+    end
+  
+  puts "finished with linux recipes"   
+  end #end if linux
+
+##########################################################################
+
+  if (node['platform_family'] == 'aix')
+
+    puts "***** platform is #{node['platform']} *****"     
+
+    puts "walking thru the list of aix os recipes"
+
+    if aixs_os_recipes["#{node.chef_environment}"]
+
+       aix_os_recipes["#{node.chef_environment}"].each do |recipe_name|
+           puts "current recipe is #{recipe_name}"
+           include_recipe "#{recipe_name}"
+       end
+    end
+
+    # walk thru middleware recipes and check against rpm
+
+  if aixs_mw_recipes["#{node.chef_environment}"]
+    
+      aix_mw_recipes["#{node.chef_environment}"].each do |recipe_name|
+          puts "current recipe is #{recipe_name}"
+          if (recipe_name =~ /postgres/i)
+              rpm, _stderr, status = Open3.capture3("lslpp -w -I  | grep -i 'postgresql'")
+              rpm[/^postgres/] ? installed = true : installed = false
+              if installed  
+                 include_recipe "#{recipe_name}"
+              end
+          end  
+      end # end aix do loop  
+   end  
+
+  puts "finished with aix recipes"
+     
+  end #end if aix
+
+################################################################################
+
+if (node['platform_family'] == 'windows')
+
+    puts "***** platform is #{node['platform']} *****"     
+
+    puts "walking thru the list of windows os recipes"
+
+    if  windows_os_recipes["#{node.chef_environment}"]
+
+       windows_os_recipes["#{node.chef_environment}"].each do |recipe_name|
+           puts "current recipe is #{recipe_name}"
+           include_recipe "#{recipe_name}"
+       end
+    end
+
+    # walk thru middleware recipes and check against rpm
+    if  windows_mw_recipes["#{node.chef_environment}"]
+    
+        windows_mw_recipes["#{node.chef_environment}"].each do |recipe_name|
+           puts "current recipe is #{recipe_name}"
+           # if (recipe_name =~ /postgres/i)
+           #     rpm, _stderr, status = Open3.capture3("lslpp -w -I  | grep -i 'postgresql'")
+           #     rpm[/^postgres/] ? installed = true : installed = false
+           #     if installed  
+           #       include_recipe "#{recipe_name}"
+           #     end
+           # end 
+      
+        end #end windows do loop
+   end
+ 
+  puts "finished with windows recipes"
+   
+end #end if windows
+
+puts "recipe_wrapper completed"
+
