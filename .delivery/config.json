@@ -14,7 +14,7 @@
   },
   "build_nodes": {
     "syntax": ["name:chefNode.idmlab.com AND platform_family:rhel"]
-  }
+  },
   "skip_phases": [
     "lint",
     "unit",
