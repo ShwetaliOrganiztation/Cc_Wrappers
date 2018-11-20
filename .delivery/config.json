@@ -13,6 +13,9 @@
     }
   },
   "skip_phases": [
+    "syntax",
+    "lint",
+    "unit",
     "functional",
     "quality",
     "security",
