@@ -12,16 +12,19 @@
       "chef_server": "true"
     }
   },
+  "build_nodes": {
+    "syntax": ["name:chefNode.idmlab.com AND platform_family:rhel"]
+  },
   "skip_phases": [
-    "syntax",
     "lint",
     "unit",
     "functional",
     "quality",
     "security",
     "smoke",
-    "provision",
-    "deploy"
+    "deploy",
+    "publish",
+    "provision"
   ],
   "job_dispatch": {
     "version": "v2"
