@@ -16,7 +16,8 @@
     "functional",
     "quality",
     "security",
-    "smoke"
+    "smoke",
+    "publish"
   ],
   "job_dispatch": {
     "version": "v2"
