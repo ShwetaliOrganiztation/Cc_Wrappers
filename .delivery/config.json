@@ -7,6 +7,9 @@
   "delivery-truck": {
     "lint": {
       "enable_cookstyle": true
+    },
+    "publish": {
+      "chef_server": "true"
     }
   },
   "skip_phases": [
@@ -17,7 +20,6 @@
     "quality",
     "security",
     "smoke",
-    "publish",
     "provision",
     "deploy"
   ],
