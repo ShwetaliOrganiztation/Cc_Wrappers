@@ -8,7 +8,7 @@
 # =================================================================
 
 name             'cc_policy_aix_was'
-version          '1.0.3'
+version          '1.0.4'
 maintainer       'Utkarsh Shah'
 maintainer_email 'utkarsh@ca.ibm.com'
 license          'IBM Proprietary - All rights reserved'

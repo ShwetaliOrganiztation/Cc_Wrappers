@@ -9,7 +9,15 @@
       "enable_cookstyle": true
     }
   },
-  "skip_phases": [],
+  "skip_phases": [
+    "syntax",
+    "lint",
+    "unit",
+    "functional",
+    "quality",
+    "security",
+    "smoke"
+  ],
   "job_dispatch": {
     "version": "v2"
   },
