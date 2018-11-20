@@ -18,7 +18,8 @@
     "security",
     "smoke",
     "publish",
-    "provision"
+    "provision",
+    "deploy"
   ],
   "job_dispatch": {
     "version": "v2"
